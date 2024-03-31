@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RetroFit2ExampleTheme {
+            RetroFit2ExampleTheme(dynamicColor = false) {
                 val navController: NavHostController = rememberNavController()
                 Scaffold(
                     bottomBar = {
@@ -52,7 +52,9 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         navController = navController,
                         startDestination = ScreenList.ProductList.name,
-                        modifier = Modifier.fillMaxSize().padding(innerPadding)
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
                     ) {
                         composable(route = ScreenList.ProductList.name) {
                             ProductListScreen(productViewModel)

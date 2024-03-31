@@ -1,6 +1,7 @@
 package iesharia.retrofit2example.data.network
 
 import com.google.gson.annotations.SerializedName
+import iesharia.retrofit2example.data.db.Product
 
 data class ProductResponse(
     @SerializedName("id") var id: Int,
@@ -15,3 +16,19 @@ data class ProductResponse(
     @SerializedName("thumbnail") var thumbnail: String,
     @SerializedName("images") var images: List<String>
 )
+
+fun productToProductResponse(product: Product): ProductResponse {
+    return ProductResponse(
+        product.id,
+        product.title,
+        product.description,
+        product.price,
+        product.discountPercentage,
+        product.rating,
+        product.stock,
+        product.brand,
+        product.category,
+        product.thumbnail,
+        emptyList()
+    )
+}

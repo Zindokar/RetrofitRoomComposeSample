@@ -3,6 +3,7 @@ package iesharia.retrofit2example
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Row
@@ -19,12 +20,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
+import androidx.compose.ui.platform.LocalContext
+import iesharia.retrofit2example.core.db.ProductDatabase
+import iesharia.retrofit2example.data.ProductDBViewModel
 import iesharia.retrofit2example.data.ProductViewModel
 import iesharia.retrofit2example.ui.theme.RetroFit2ExampleTheme
 
@@ -33,7 +40,15 @@ enum class ScreenList() {
     FavoriteList
 }
 
+@Suppress("UNCHECKED_CAST")
 class MainActivity : ComponentActivity() {
+    val db by lazy {
+        Room.databaseBuilder(
+            context = applicationContext,
+            klass = ProductDatabase::class.java,
+            name = "product.db"
+        ).build()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -48,7 +63,17 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) { innerPadding ->
+                    val databaseViewModel: ProductDBViewModel by viewModels<ProductDBViewModel>(
+                        factoryProducer = {
+                            object : ViewModelProvider.Factory {
+                                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                                    return ProductDBViewModel(db.dao) as T
+                                }
+                            }
+                        }
+                    )
                     val productViewModel: ProductViewModel = viewModel()
+                    val context = LocalContext.current
                     NavHost(
                         navController = navController,
                         startDestination = ScreenList.ProductList.name,
@@ -57,10 +82,10 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding)
                     ) {
                         composable(route = ScreenList.ProductList.name) {
-                            ProductListScreen(productViewModel)
+                            ProductListScreen(productViewModel, databaseViewModel, context)
                         }
                         composable(route = ScreenList.FavoriteList.name) {
-                            FavoriteListScreen()
+                            FavoriteListScreen(databaseViewModel, context)
                         }
                     }
                 }
@@ -81,7 +106,8 @@ fun BottomBarItems(navController: NavController) {
         ) {
             Icon(
                 modifier = Modifier.fillMaxSize(),
-                imageVector = Icons.Filled.Home, contentDescription = "Lista Productos"
+                imageVector = Icons.Filled.Home,
+                contentDescription = "Lista Productos"
             )
         }
         IconButton(
@@ -90,7 +116,8 @@ fun BottomBarItems(navController: NavController) {
         ) {
             Icon(
                 modifier = Modifier.fillMaxSize(),
-                imageVector = Icons.Filled.Favorite, contentDescription = "Favoritos Productos"
+                imageVector = Icons.Filled.Favorite,
+                contentDescription = "Favoritos Productos"
             )
         }
     }

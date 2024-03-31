@@ -1,17 +1,23 @@
 package iesharia.retrofit2example
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import iesharia.retrofit2example.data.ProductDBViewModel
 import iesharia.retrofit2example.data.ProductViewModel
 
 @Composable
-fun ProductListScreen(viewModel: ProductViewModel) {
-    val isLoading: Boolean by viewModel.isLoading.observeAsState(initial = true)
+fun ProductListScreen(
+    productViewModel: ProductViewModel,
+    databaseViewModel: ProductDBViewModel,
+    context: Context
+) {
+    val isLoading: Boolean by productViewModel.isLoading.observeAsState(initial = true)
     if (isLoading) {
-        viewModel.getAllProducts()
+        productViewModel.getAllProducts()
         LoadingScreen()
     } else {
-        ProductListView("Listado de productos", viewModel.productList)
+        ProductListView("Listado de productos", productViewModel.productList.value!!, databaseViewModel, context)
     }
 }

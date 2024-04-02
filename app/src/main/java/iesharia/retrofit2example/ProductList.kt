@@ -31,44 +31,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImage
 import iesharia.retrofit2example.data.ProductDBViewModel
 import iesharia.retrofit2example.data.db.productResponseToProduct
 import iesharia.retrofit2example.data.network.ProductResponse
 
 @Composable
-fun FavoriteListView(
-    title: String,
-    favoriteList: List<ProductResponse>,
-    databaseViewModel: ProductDBViewModel,
-    context: Context
-) {
-    ProductColumn(title, favoriteList, Icons.Filled.Delete) { product: ProductResponse ->
-        Toast.makeText(context, "Producto eliminado", Toast.LENGTH_LONG).show()
-        databaseViewModel.deleteFavoriteProduct(
-            productResponseToProduct(product).id
-        )
-    }
-}
-
-@Composable
-fun ProductListView(
-    title: String,
-    productList: List<ProductResponse>,
-    databaseViewModel: ProductDBViewModel,
-    context: Context
-) {
-    ProductColumn(title, productList, Icons.Filled.Add) { product: ProductResponse ->
-        Toast.makeText(context, "Producto añadido", Toast.LENGTH_LONG).show()
-        databaseViewModel.insertOrUpdateFavoriteProduct(
-            productResponseToProduct(product)
-        )
-    }
-}
-
-@Composable
-fun ProductColumn(
+fun ProductList(
     title: String,
     productList: List<ProductResponse>,
     icon: ImageVector,

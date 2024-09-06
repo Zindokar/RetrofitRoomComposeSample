@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import iesharia.retrofit2example.data.network.ProductRepository
 import iesharia.retrofit2example.data.network.ProductResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ProductViewModel : ViewModel() {

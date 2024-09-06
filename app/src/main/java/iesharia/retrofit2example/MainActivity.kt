@@ -35,7 +35,7 @@ import iesharia.retrofit2example.data.ProductDBViewModel
 import iesharia.retrofit2example.data.ProductViewModel
 import iesharia.retrofit2example.ui.theme.RetroFit2ExampleTheme
 
-enum class ScreenList() {
+enum class ScreenList {
     ProductList,
     FavoriteList
 }

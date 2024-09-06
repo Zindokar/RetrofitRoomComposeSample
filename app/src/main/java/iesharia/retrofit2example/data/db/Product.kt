@@ -10,7 +10,7 @@ data class Product(
     var id: Int,
     var title: String,
     var description: String,
-    var price: Int,
+    var price: Double,
     var discountPercentage: Double,
     var rating: Double,
     var stock: Int,

@@ -1,4 +1,4 @@
-package iesharia.retrofit2example.data.network
+package iesharia.retrofit2example.network
 
 import com.google.gson.annotations.SerializedName
 

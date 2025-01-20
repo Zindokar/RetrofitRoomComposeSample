@@ -10,8 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import iesharia.retrofit2example.data.ProductDBViewModel
 import iesharia.retrofit2example.data.db.productResponseToProduct
-import iesharia.retrofit2example.data.network.ProductResponse
-import iesharia.retrofit2example.data.network.productToProductResponse
+import iesharia.retrofit2example.network.ProductResponse
+import iesharia.retrofit2example.network.productToProductResponse
 
 @Composable
 fun FavoriteListScreen(databaseViewModel: ProductDBViewModel, context: Context) {

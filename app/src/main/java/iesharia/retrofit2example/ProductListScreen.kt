@@ -10,7 +10,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import iesharia.retrofit2example.data.ProductDBViewModel
 import iesharia.retrofit2example.data.ProductViewModel
 import iesharia.retrofit2example.data.db.productResponseToProduct
-import iesharia.retrofit2example.data.network.ProductResponse
+import iesharia.retrofit2example.network.ProductResponse
 
 @Composable
 fun ProductListScreen(

@@ -1,6 +1,5 @@
-package iesharia.retrofit2example.data.network
+package iesharia.retrofit2example.network
 
-import iesharia.retrofit2example.core.network.RetrofitHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -14,5 +13,11 @@ class ProductService {
         }
     }
 
+    suspend fun searchProduct(searchString: String): ProductsResponse {
+        return withContext(Dispatchers.IO) {
+            val response = retrofit.create(ProductClient::class.java).searchProduct(searchString)
+            return@withContext response.body()!!
+        }
+    }
 
 }

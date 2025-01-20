@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import iesharia.retrofit2example.data.ProductDBViewModel
 import iesharia.retrofit2example.data.db.productResponseToProduct
-import iesharia.retrofit2example.data.network.ProductResponse
+import iesharia.retrofit2example.network.ProductResponse
 
 @Composable
 fun ProductList(

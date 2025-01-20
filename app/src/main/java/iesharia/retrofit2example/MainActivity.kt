@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,14 +31,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import androidx.compose.ui.platform.LocalContext
-import iesharia.retrofit2example.core.db.ProductDatabase
+import iesharia.retrofit2example.data.db.ProductDatabase
 import iesharia.retrofit2example.data.ProductDBViewModel
 import iesharia.retrofit2example.data.ProductViewModel
 import iesharia.retrofit2example.ui.theme.RetroFit2ExampleTheme
 
 enum class ScreenList {
     ProductList,
-    FavoriteList
+    FavoriteList,
+    SearchScreen
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -87,6 +89,9 @@ class MainActivity : ComponentActivity() {
                         composable(route = ScreenList.FavoriteList.name) {
                             FavoriteListScreen(databaseViewModel, context)
                         }
+                        composable(route = ScreenList.SearchScreen.name) {
+                            SearchScreen(productViewModel, databaseViewModel, context)
+                        }
                     }
                 }
             }
@@ -97,9 +102,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BottomBarItems(navController: NavController) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(start = 30.dp, end = 30.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         IconButton(
             onClick = { navController.navigate(ScreenList.ProductList.name) },
@@ -118,6 +123,16 @@ fun BottomBarItems(navController: NavController) {
                 modifier = Modifier.fillMaxSize(),
                 imageVector = Icons.Filled.Favorite,
                 contentDescription = "Favoritos Productos"
+            )
+        }
+        IconButton(
+            modifier = Modifier.padding(start = 30.dp),
+            onClick = { navController.navigate(ScreenList.SearchScreen.name) },
+        ) {
+            Icon(
+                modifier = Modifier.fillMaxSize(),
+                imageVector = Icons.Filled.Search,
+                contentDescription = "Búsqueda de Productos"
             )
         }
     }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import iesharia.retrofit2example.data.db.Product
 import iesharia.retrofit2example.data.db.ProductDao
-import iesharia.retrofit2example.data.network.ProductResponse
+import iesharia.retrofit2example.network.ProductResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 

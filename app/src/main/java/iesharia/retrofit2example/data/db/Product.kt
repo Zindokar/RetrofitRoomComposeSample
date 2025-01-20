@@ -2,7 +2,7 @@ package iesharia.retrofit2example.data.db
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import iesharia.retrofit2example.data.network.ProductResponse
+import iesharia.retrofit2example.network.ProductResponse
 
 @Entity
 data class Product(

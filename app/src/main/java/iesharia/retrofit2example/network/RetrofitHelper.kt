@@ -1,4 +1,4 @@
-package iesharia.retrofit2example.core.network
+package iesharia.retrofit2example.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
